@@ -6,7 +6,7 @@ msgsrv = ""
 host = socket.gethostname()
 
 client_socket = socket.socket()
-client_socket.connect(("192.168.43.255", 10000))
+client_socket.connect(("192.168.43.2", 10000))
 
 while msgcl != "bye" and msgsrv != "bye" and msgcl != "arret" and msgsrv != "arret":
     msgcl = input("Amon:")
