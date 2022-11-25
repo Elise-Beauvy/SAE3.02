@@ -6,7 +6,7 @@ msgsrv = ""
 host = socket.gethostname()
 print(host)
 client_socket = socket.socket()
-client_socket.connect(("LAPTOP-VUDB1FRV",10000))
+client_socket.connect(("127.0.0.1",10000))
 
 while msgcl != "bye" and msgsrv != "bye" and msgcl != "arret" and msgsrv != "arret":
     msgcl = input("Amon:")
@@ -14,4 +14,3 @@ while msgcl != "bye" and msgsrv != "bye" and msgcl != "arret" and msgsrv != "arr
     msgsrv = client_socket.recv(1024).decode()
     print(msgsrv)
 client_socket.close()
-
