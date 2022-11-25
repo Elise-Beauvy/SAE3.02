@@ -6,7 +6,7 @@ msgcl = ""
 host = socket.gethostname()
 print(host)
 server_socket = socket.socket()
-server_socket.bind((host,1024))
+server_socket.bind((host,25))
 server_socket.listen(1)
 conn, address = server_socket.accept()
 

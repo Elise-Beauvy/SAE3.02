@@ -6,7 +6,7 @@ msgsrv = ""
 host = socket.gethostname()
 print(host)
 client_socket = socket.socket()
-client_socket.connect((host,1024))
+client_socket.connect((host,25))
 
 msgcl = input("Amon:")
 client_socket.send(msgcl.encode())
