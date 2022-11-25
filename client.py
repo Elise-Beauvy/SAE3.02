@@ -6,7 +6,7 @@ msgsrv = ""
 host = socket.gethostname()
 print(host)
 client_socket = socket.socket()
-client_socket.connect(("127.0.0.1",80))
+client_socket.connect(("127.0.0.1",1024))
 
 while msgcl != "bye" and msgsrv != "bye" and msgcl != "arret" and msgsrv != "arret":
     msgcl = input("Amon:")
