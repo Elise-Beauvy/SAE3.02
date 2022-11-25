@@ -6,7 +6,7 @@ msgcl = ""
 host = socket.gethostname()
 print(host)
 server_socket = socket.socket()
-server_socket.bind(("0.0.0.0",10000))
+server_socket.bind(("127.0.0.1",10000))
 server_socket.listen(1)
 while msgcl != "arret" and msgsrv != "arret":
     conn, address = server_socket.accept()
