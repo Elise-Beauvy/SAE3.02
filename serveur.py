@@ -4,9 +4,9 @@ msgsrv = ""
 msgcl = ""
 
 host = socket.gethostname()
-
+print(host)
 server_socket = socket.socket()
-server_socket.bind(("192.168.43.3",10000))
+server_socket.bind((host,10000))
 server_socket.listen(1)
 while msgcl != "arret" and msgsrv != "arret":
     conn, address = server_socket.accept()
