@@ -1,15 +1,40 @@
-import socket
+import socket,sys
 
-msgcl = ""
-msgsrv = ""
 
-host = socket.gethostname()
-print(host)
-client_socket = socket.socket()
-client_socket.connect((host,10000))
 
-msgcl = input("Amon:")
-client_socket.send(msgcl.encode())
-msgsrv = client_socket.recv(1024).decode()
-print(msgsrv)
-client_socket.close()
+msgclient = ""
+msgserveur = ""
+
+class Client():
+    def __init__(self,hostname: str,port: int):
+        self.__port = port
+        self.__hostname = hostname
+        self.__socket = None
+
+
+    def isConnect(self):
+        return self.__socket!=None
+
+    def connect(self):
+        try:
+
+            self.__socket = socket.socket()
+            self.__socket.connect((self.__hostname,self.__port))
+
+
+        except socket.error:
+            print("adresseIP/Port déja utilisé ou inexistant")
+            sys.exit(-1)
+
+    def send(self,msg):
+        if self.isConnect():
+            self.__socket.send(msg.encode())
+            msgserveur = self.__socket.recv(1024).decode()
+            print(msgserveur)
+        else:
+            print("n'est pas connecté")
+
+    def close(self):
+        self.__socket.close()
+
+
