@@ -1,15 +1,17 @@
 import sys
 import csv
+from client import Client
 
 
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QGridLayout, QLabel, QPushButton, QLineEdit, QComboBox, \
     QHBoxLayout, QMessageBox
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
-from client import Client
 
-class MainWindow(QMainWindow, Client):
-    def __init__(self,hostname: str,port: int):
-        super().__init__(hostname,port)
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
         self.__widget = QWidget()
         self.__widget.setWindowTitle("Client")
         self.setCentralWidget(self.__widget)
@@ -24,7 +26,7 @@ class MainWindow(QMainWindow, Client):
         self.__kill = QPushButton("Kill")
         self.__reset = QPushButton("Reset")
         self.__hostname = QPushButton("Hostname")
-        self.__msg = QPushButton("envoie des messages")
+        self.__retour = QPushButton("<-")
 
         # Ajouter les composants au grid ayout
         self.__grid.addWidget(self.__srv1, 1, 1)
@@ -35,6 +37,10 @@ class MainWindow(QMainWindow, Client):
         self.__srv2.clicked.connect(self._action2)
         self.__srv3.clicked.connect(self._action3)
 
+        self.__srv1.setStyleSheet("color: red")
+        self.__srv2.setStyleSheet("color: blue")
+        self.__srv3.setStyleSheet("color: green")
+
     def _action1(self):
         self.__srv2.hide()
         self.__srv3.hide()
@@ -42,9 +48,7 @@ class MainWindow(QMainWindow, Client):
         self.__grid.addWidget(self.__kill,3,0)
         self.__grid.addWidget(self.__reset,4,0)
         self.__grid.addWidget(self.__hostname,5,0)
-        self.__grid.addWidget(self.__msg,6,0)
         self.__hostname.clicked.connect(self._host)
-        self.__msg.clicked.connect(self._message)
 
 
     def _host(self):
@@ -69,9 +73,23 @@ class MainWindow(QMainWindow, Client):
         self.__grid.addWidget(self.__kill,3,0)
         self.__grid.addWidget(self.__reset,4,0)
 
+    def closeEvent(self, _e: QCloseEvent):  # <--- Fermeture de l'application depuis la croix Windows
+        box = QMessageBox()
+        box.setWindowTitle("Quitter ?")
+        box.setText("Voulez vous quitter ?")
+        box.addButton(QMessageBox.Yes)
+        box.addButton(QMessageBox.No)
+
+        ret = box.exec()
+
+        if ret == QMessageBox.Yes:
+            QCoreApplication.exit(0)
+        else:
+            _e.ignore()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = MainWindow("127.0.0.1",10110)
+    window = MainWindow()
     window.show()
     app.exec()
