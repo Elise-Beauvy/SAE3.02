@@ -7,15 +7,6 @@ class Client():
         self.__hostname = hostname
         self.__socket = None
 
-    def dialogue(self):
-        msg = ""
-        msg_srv = ""
-        while msg != "kill" and msg != "disconnect" and msg != "reset":
-            msg = input("client: ")
-            self.__socket.send(msg.encode())
-            msg_srv = self.__socket.recv(1024).decode()
-            print(msg_srv)
-
     def isConnect(self):
         return self.__socket!=None
 
@@ -31,30 +22,24 @@ class Client():
             sys.exit(-1)
 
     def __send(self):
-        if self.isConnect():
-            message = input("client: ")
-            try:
-                self.__socket.send(message.encode())
-            except BrokenPipeError:
-                print("erreur, socket fermée")
-            return message
-        else:
-            print("n'est pas connecté")
-
-    def __receive(self):
-        message_srv = ""
-        while message_srv != "kill" and message_srv != "disconnect" and message_srv != "reset":
-            message_srv = self.__socket.recv(1024).decode()
-            print(message_srv)
+        message = ""
+        while message != "kill" and message != "disconnect" and message != "reset":
+            if self.isConnect():
+                try:
+                    message = input("client: ")
+                    self.__socket.send(message.encode())
+                    message_srv = self.__socket.recv(1024).decode()
+                    print(message_srv)
+                except BrokenPipeError:
+                    print("erreur, socket fermée")
+            else:
+                print("n'est pas connecté")
 
     def close(self):
         self.__socket.close()
 
     def send(self):
         threading.Thread(target=self.__send())
-
-    def receive(self):
-        threading.Thread(target=self.__receive())
 
     def connect(self):
         threading.Thread(target=self.__connect())
@@ -68,4 +53,4 @@ if __name__ == "__main__":
 
     # en dehors du if
     client.connect()
-    client.dialogue()
+    client.send()

@@ -43,7 +43,6 @@ def serveur():
                     le serveur va ici récupere les commandes du client et lui renvoyer. Dans la suite de la SAÉ, 
                     le serveur fera pareil mais en renvoyant le résultat des commandes demandées par le client.
                     """
-                    conn.send(msg.encode())
                 conn.close()
         print ("Connection closed")
         server_socket.close()
