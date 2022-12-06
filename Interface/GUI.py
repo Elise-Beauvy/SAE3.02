@@ -1,6 +1,9 @@
 import sys
 import csv
 from client import Client
+from GUI_serv1 import Serveur1
+from GUI_serv2 import Serveur2
+from GUI_serv3 import Serveur3
 
 
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QGridLayout, QLabel, QPushButton, QLineEdit, QComboBox, \
@@ -26,52 +29,31 @@ class MainWindow(QMainWindow):
         self.__kill = QPushButton("Kill")
         self.__reset = QPushButton("Reset")
         self.__hostname = QPushButton("Hostname")
-        self.__retour = QPushButton("<-")
 
         # Ajouter les composants au grid ayout
         self.__grid.addWidget(self.__srv1, 1, 1)
         self.__grid.addWidget(self.__srv2, 2, 1)
         self.__grid.addWidget(self.__srv3, 3, 1)
 
-        self.__srv1.clicked.connect(self._action1)
-        self.__srv2.clicked.connect(self._action2)
-        self.__srv3.clicked.connect(self._action3)
+        self.__srv1.clicked.connect(self._clicserveur)
+        self.__srv2.clicked.connect(self._clicserveur2)
+        self.__srv3.clicked.connect(self._clicserveur3)
 
         self.__srv1.setStyleSheet("color: red")
         self.__srv2.setStyleSheet("color: blue")
         self.__srv3.setStyleSheet("color: green")
 
-    def _action1(self):
-        self.__srv2.hide()
-        self.__srv3.hide()
-        self.__grid.addWidget(self.__disconnect,2,0)
-        self.__grid.addWidget(self.__kill,3,0)
-        self.__grid.addWidget(self.__reset,4,0)
-        self.__grid.addWidget(self.__hostname,5,0)
-        self.__hostname.clicked.connect(self._host)
+    def _clicserveur(self):
+        self.__serv1 = Serveur1()
+        self.__serv1.show()
 
+    def _clicserveur2(self):
+        self.__serv2 = Serveur2()
+        self.__serv2.show()
 
-    def _host(self):
-        cr = csv.reader(open('hostname.csv','r'))
-        print (cr)
-        QMessageBox(text="hostname.csv"[0])
-
-    def _message(self):
-        QMessageBox(Client)
-
-    def _action2(self):
-        self.__srv1.hide()
-        self.__srv3.hide()
-        self.__grid.addWidget(self.__disconnect, 2, 0)
-        self.__grid.addWidget(self.__kill, 3, 0)
-        self.__grid.addWidget(self.__reset, 4, 0)
-
-    def _action3(self):
-        self.__srv1.hide()
-        self.__srv2.hide()
-        self.__grid.addWidget(self.__disconnect,2,0)
-        self.__grid.addWidget(self.__kill,3,0)
-        self.__grid.addWidget(self.__reset,4,0)
+    def _clicserveur3(self):
+        self.__serv3 = Serveur3()
+        self.__serv3.show()
 
     def closeEvent(self, _e: QCloseEvent):  # <--- Fermeture de l'application depuis la croix Windows
         box = QMessageBox()
