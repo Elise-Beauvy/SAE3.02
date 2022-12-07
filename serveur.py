@@ -1,11 +1,16 @@
+import sys
 import socket
 import csv
+from _socket import gethostbyname, gethostname
 
-host = "127.0.0.1"
+import psutil
+import platform
 
-with open('hostname.csv', 'w', newline='') as hostname:
+host = socket.gethostname()
+
+"""with open('hostname.csv', 'w', newline='') as hostname:
     writer = csv.writer(hostname)
-    writer.writerow([host])
+    writer.writerow([host])"""
 import socket
 
 def serveur():
@@ -21,6 +26,7 @@ def serveur():
 # l'adresse 0.0.0.0 permet d'écouter toutes les IP de la machine, localhost, locale comme publique
         server_socket.bind(("0.0.0.0", 10111))
 
+
         server_socket.listen(1)
         print('Serveur en attente de connexion')
         while msg != "kill" and msg != "reset":
@@ -29,6 +35,9 @@ def serveur():
             try :
                 conn, addr = server_socket.accept()
                 print (addr)
+                with open('hostname.csv', 'w', newline='') as hostname:
+                    writer = csv.writer(hostname)
+                    writer.writerow([f"systeme d'exploitation:{platform.system()} - nom: {host} - adresse ip: {gethostbyname(gethostname())}"])
             except ConnectionError:
                 print ("erreur de connection")
                 break
@@ -36,6 +45,19 @@ def serveur():
                 while msg != "kill" and msg != "reset" and msg != "disconnect":
                     msg = conn.recv(1024).decode()
                     print ("réception du client: ", msg)
+                    if msg == "cpu":
+                        print ("utilisation actuelle du processeur en pourcentage :  ",str(psutil.cpu_times_percent()))
+                    if msg == "name":
+                        print (socket.gethostname())
+                    if msg == "ip":
+                        print(gethostbyname(gethostname()))
+                    if msg == "ram":
+                        print("Pourcentage de la RAM utilisé :", psutil.virtual_memory().percent,"%")
+                    if msg == "os":
+                        print ("système d'exploitation:", platform.system())
+                    if msg == "python":
+                        print("version de python: ", sys.version)
+
                     msg_srv = str(input("Serveur:"))
                     conn.send(msg_srv.encode())
                     # msg = input('Enter a message to send: ')
@@ -43,10 +65,12 @@ def serveur():
                     le serveur va ici récupere les commandes du client et lui renvoyer. Dans la suite de la SAÉ, 
                     le serveur fera pareil mais en renvoyant le résultat des commandes demandées par le client.
                     """
+
                 conn.close()
         print ("Connection closed")
         server_socket.close()
         print ("Server closed")
+
 
 # Coder les commande ici
 

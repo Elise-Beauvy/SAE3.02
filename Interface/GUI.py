@@ -1,13 +1,10 @@
 import sys
-import csv
-from client import Client
-from GUI_serv1 import Serveur1
+from Interface.GUI_serv1 import Serveur1
 from GUI_serv2 import Serveur2
 from GUI_serv3 import Serveur3
 
 
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QGridLayout, QLabel, QPushButton, QLineEdit, QComboBox, \
-    QHBoxLayout, QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QGridLayout, QPushButton, QMessageBox
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
@@ -25,10 +22,6 @@ class MainWindow(QMainWindow):
         self.__srv1 = QPushButton("Serveur1")
         self.__srv2 = QPushButton("Serveur2")
         self.__srv3 = QPushButton("Serveur3")
-        self.__disconnect = QPushButton("Disconnect")
-        self.__kill = QPushButton("Kill")
-        self.__reset = QPushButton("Reset")
-        self.__hostname = QPushButton("Hostname")
 
         # Ajouter les composants au grid ayout
         self.__grid.addWidget(self.__srv1, 1, 1)
