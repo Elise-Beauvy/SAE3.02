@@ -2,6 +2,7 @@ import sys
 from Interface.GUI_serv1 import Serveur1
 from GUI_serv2 import Serveur2
 from GUI_serv3 import Serveur3
+from client import Client
 
 
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QGridLayout, QPushButton, QMessageBox
@@ -48,9 +49,9 @@ class MainWindow(QMainWindow):
         self.__serv3 = Serveur3()
         self.__serv3.show()
 
-    def closeEvent(self, _e: QCloseEvent):  # <--- Fermeture de l'application depuis la croix Windows
+    def closeEvent(self, _e: QCloseEvent):
         box = QMessageBox()
-        box.setWindowTitle("Quitter ?")
+        box.setWindowTitle("Quitter")
         box.setText("Voulez vous quitter ?")
         box.addButton(QMessageBox.Yes)
         box.addButton(QMessageBox.No)
