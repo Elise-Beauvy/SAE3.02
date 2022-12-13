@@ -1,6 +1,5 @@
 import sys
 import socket
-import csv
 from _socket import gethostbyname, gethostname
 
 import psutil
@@ -22,7 +21,7 @@ def serveur():
         server_socket = socket.socket()
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        server_socket.bind(("0.0.0.0", 10111))
+        server_socket.bind(("0.0.0.0", 10112))
 
 
         server_socket.listen(1)
@@ -33,9 +32,6 @@ def serveur():
             try :
                 conn, addr = server_socket.accept()
                 print (addr)
-                with open('hostname.csv', 'w', newline='') as hostname:
-                    writer = csv.writer(hostname)
-                    writer.writerow([f"systeme d'exploitation:{platform.system()} - nom: {host} - adresse ip: {gethostbyname(gethostname())}"])
             except ConnectionError:
                 print ("erreur de connection")
                 break

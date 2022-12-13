@@ -26,8 +26,8 @@ class MainWindow(QMainWindow):
 
         # Ajouter les composants au grid ayout
         self.__grid.addWidget(self.__srv1, 1, 1)
-        self.__grid.addWidget(self.__srv2, 2, 1)
-        self.__grid.addWidget(self.__srv3, 3, 1)
+        """self.__grid.addWidget(self.__srv2, 2, 1)
+        self.__grid.addWidget(self.__srv3, 3, 1)"""
 
         self.__srv1.clicked.connect(self._clicserveur)
         self.__srv2.clicked.connect(self._clicserveur2)
