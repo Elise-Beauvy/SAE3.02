@@ -40,25 +40,27 @@ def serveur():
                     msg = conn.recv(1024).decode()
                     print ("réception du client: ", msg)
                     if msg == "cpu":
-                        print ("utilisation actuelle du processeur en pourcentage :  ",str(psutil.cpu_times_percent()))
+                        msg = f"utilisation actuelle du processeur en pourcentage : {str(psutil.cpu_times_percent())}"
+                        conn.send(msg.encode())
                     if msg == "name":
-                        print (socket.gethostname())
+                        msg = socket.gethostname()
+                        conn.send(msg.encode())
                     if msg == "ip":
-                        print(gethostbyname(gethostname()))
+                        msg = gethostbyname(gethostname())
+                        conn.send(msg.encode())
                     if msg == "ram":
-                        print("Pourcentage de la RAM utilisé :", psutil.virtual_memory().percent,"%")
+                        msg = f"Pourcentage de la RAM utilisé : {psutil.virtual_memory().percent}%"
+                        conn.send(msg.encode())
                     if msg == "os":
-                        print ("système d'exploitation:", platform.system())
+                        msg = f"système d'exploitation: {platform.system()}"
+                        conn.send(msg.encode())
                     if msg == "python":
                         print("version de python: ", sys.version)
 
-                    msg_srv = str(input("Serveur:"))
-                    conn.send(msg_srv.encode())
-                    # msg = input('Enter a message to send: ')
-                    """ 
-                    le serveur va ici récupere les commandes du client et lui renvoyer. Dans la suite de la SAÉ, 
-                    le serveur fera pareil mais en renvoyant le résultat des commandes demandées par le client.
-                    """
+
+                    """msg_srv = str(input("Serveur:"))
+                    conn.send(msg_srv.encode())"""
+
 
                 conn.close()
         print ("Connection closed")

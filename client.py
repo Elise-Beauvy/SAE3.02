@@ -21,7 +21,7 @@ class Client():
             print("adresseIP/Port déja utilisé ou inexistant")
             sys.exit(-1)
 
-    def send(self):
+    def __send(self):
         message = ""
         while message != "kill" and message != "disconnect" and message != "reset":
             if self.isConnect():
@@ -65,4 +65,4 @@ if __name__ == "__main__":
 
     # en dehors du if
     client.connect()
-    client.send_interface("cpu")
+    client.send()
