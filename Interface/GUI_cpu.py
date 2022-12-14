@@ -20,6 +20,8 @@ class Cpu(QMainWindow):
         self.__info = QLabel("CPU")
 
         self.__grid.addWidget(self.__info,1,0)
+        monclient = Client("127.0.0.1",10111)
+        monclient.send_int("cpu")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

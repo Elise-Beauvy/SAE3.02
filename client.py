@@ -21,7 +21,7 @@ class Client():
             print("adresseIP/Port déja utilisé ou inexistant")
             sys.exit(-1)
 
-    def __send(self):
+    def send(self):
         message = ""
         while message != "kill" and message != "disconnect" and message != "reset":
             if self.isConnect():
@@ -35,11 +35,23 @@ class Client():
             else:
                 print("n'est pas connecté")
 
+    def send_interface(self, message):
+        if self.isConnect():
+            try:
+                self.__socket.send(message.encode())
+                message_srv = self.__socket.recv(1024).decode()
+                print(message_srv)
+            except BrokenPipeError:
+                print("erreur, socket fermée")
+        else:
+            print("n'est pas connecté")
+
     def close(self):
         self.__socket.close()
 
     def send(self):
         threading.Thread(target=self.__send())
+
 
     def connect(self):
         threading.Thread(target=self.__connect())
@@ -53,4 +65,4 @@ if __name__ == "__main__":
 
     # en dehors du if
     client.connect()
-    client.send()
+    client.send_interface("cpu")

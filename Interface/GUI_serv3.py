@@ -1,5 +1,4 @@
 import sys
-import csv
 from client import Client
 
 
@@ -49,10 +48,6 @@ class Serveur3(QMainWindow):
 
         self.__info.setStyleSheet("color: green")
 
-    """def _host(self):
-        cr = csv.reader(open('../hostname.csv', 'r'))
-        print(cr)
-        QMessageBox(text="hostname.csv")"""
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

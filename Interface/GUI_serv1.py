@@ -1,5 +1,4 @@
 import sys
-import csv
 
 from client import Client
 from GUI_cpu import Cpu
@@ -69,14 +68,17 @@ class Serveur1(QMainWindow):
         IP.append("localhost")
         for ip in IP:
             print(f"Connexion à {ip} ...")
-            monclient = Client(ip, 10112)
+            monclient = Client(ip, 10111)
             monclient.connect()
             print("Client connecté au serveur")
             self.__clientList.append(monclient)
 
     def _cpu(self):
-        self.__cpu = Cpu()
-        self.__cpu.show()
+        Client.send_interface("cpu")
+
+        """QMessageBox(text=).exec()"""
+        """self.__cpu = Cpu()
+        self.__cpu.show()"""
 
     def _os(self):
         self.__os = Os()

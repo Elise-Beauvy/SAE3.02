@@ -21,7 +21,7 @@ def serveur():
         server_socket = socket.socket()
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        server_socket.bind(("0.0.0.0", 10112))
+        server_socket.bind(("0.0.0.0", 10111))
 
 
         server_socket.listen(1)
