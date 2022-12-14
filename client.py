@@ -46,15 +46,20 @@ class Client():
         else:
             print("n'est pas connecté")
 
+    def __receive(self):
+        self.__socket.recv(1024).decode()
+
     def close(self):
         self.__socket.close()
 
     def send(self):
         threading.Thread(target=self.__send())
 
-
     def connect(self):
         threading.Thread(target=self.__connect())
+
+    def receive(self):
+        threading.Thread(target=self.__receive())
 
 
 if __name__ == "__main__":
@@ -66,3 +71,4 @@ if __name__ == "__main__":
     # en dehors du if
     client.connect()
     client.send()
+

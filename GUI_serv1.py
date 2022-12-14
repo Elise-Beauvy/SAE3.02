@@ -75,6 +75,7 @@ class Serveur1(QMainWindow):
             monclient.connect()
             print("Client connecté au serveur")
             self.__clientList.append(monclient)
+            self.__data = monclient.receive()
 
     def _disconnect(self):
         try:
@@ -104,6 +105,7 @@ class Serveur1(QMainWindow):
         try:
             for Client in self.__clientList:
                 Client.send_interface("cpu")
+                QMessageBox.addAction(self.__data)
         except:
             print("Serveur ou client pas connecté")
 
