@@ -54,6 +54,7 @@ class Serveur1(QMainWindow):
         self.__boutonlire.clicked.connect(self._lireunfichier)
         self.__disconnect.clicked.connect(self._disconnect)
         self.__kill.clicked.connect(self._kill)
+        self.__reset.clicked.connect(self._reset)
         self.__cpu.clicked.connect(self._cpu)
         self.__os.clicked.connect(self._os)
         self.__ip.clicked.connect(self._ip)
@@ -90,6 +91,14 @@ class Serveur1(QMainWindow):
                 print("serveur déconnecté")
         except:
             print ("Serveur ou client pas connecté")
+
+    def _reset(self):
+        try:
+            for Client in self.__clientList:
+                Client.send_interface("reset")
+                print("redémarrage du serveur, client déconnecté")
+        except:
+            print ("Serveur ou client pas connecte")
 
     def _cpu(self):
         try:
