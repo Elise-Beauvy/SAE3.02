@@ -60,9 +60,16 @@ class Serveur1(QMainWindow):
         self.__ip.clicked.connect(self._ip)
         self.__name.clicked.connect(self._name)
         self.__ram.clicked.connect(self._ram)
-        """self.__disconnect.clicked.connect(self._disco)"""
 
         self.__info.setStyleSheet("color: red")
+        self.__disconnect.setStyleSheet("color: green")
+        self.__kill.setStyleSheet("color: green")
+        self.__reset.setStyleSheet("color: green")
+        self.__cpu.setStyleSheet("color: blue")
+        self.__os.setStyleSheet("color: blue")
+        self.__ip.setStyleSheet("color: blue")
+        self.__name.setStyleSheet("color: blue")
+        self.__ram.setStyleSheet("color: blue")
 
     def _lireunfichier(self):
         print(f"Lecture du fichier {self.__lirefichier}")
