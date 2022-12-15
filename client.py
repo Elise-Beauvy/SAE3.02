@@ -40,7 +40,7 @@ class Client():
             try:
                 self.__socket.send(message.encode())
                 message_srv = self.__socket.recv(1024).decode()
-                print(message_srv)
+                return message_srv
             except BrokenPipeError:
                 print("erreur, socket fermée")
         else:

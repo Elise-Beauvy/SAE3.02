@@ -5,7 +5,7 @@ from client import Client
 
 
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QGridLayout, QLabel, QPushButton, QLineEdit, QComboBox, \
-    QHBoxLayout, QMessageBox
+    QHBoxLayout, QMessageBox, QTextBrowser, QTableView, QTableWidget
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
@@ -71,11 +71,10 @@ class Serveur1(QMainWindow):
         IP.append("localhost")
         for ip in IP:
             print(f"Connexion à {ip} ...")
-            monclient = Client(ip, 10111)
-            monclient.connect()
+            self.__monclient = Client(ip, 10111)
+            self.__monclient.connect()
             print("Client connecté au serveur")
-            self.__clientList.append(monclient)
-            self.__data = monclient.receive()
+            self.__clientList.append(self.__monclient)
 
     def _disconnect(self):
         try:
@@ -104,36 +103,40 @@ class Serveur1(QMainWindow):
     def _cpu(self):
         try:
             for Client in self.__clientList:
-                Client.send_interface("cpu")
-                QMessageBox.addAction(self.__data)
+                cpu = Client.send_interface("cpu")
+                QMessageBox(text=f"{cpu}").exec()
         except:
             print("Serveur ou client pas connecté")
 
     def _os(self):
         try:
             for Client in self.__clientList:
-                Client.send_interface("os")
+                os = Client.send_interface("os")
+                QMessageBox(text=f"{os}").exec()
         except:
             print("Serveur ou client pas connecté")
 
     def _ip(self):
         try:
             for Client in self.__clientList:
-                Client.send_interface("ip")
+                ip = Client.send_interface("ip")
+                QMessageBox(text=f"{ip}").exec()
         except:
             print("Serveur ou client pas connecté")
 
     def _name(self):
         try:
             for Client in self.__clientList:
-                Client.send_interface("name")
+                name = Client.send_interface("name")
+                QMessageBox(text=f"{name}").exec()
         except:
             print("Serveur ou client pas connecté")
 
     def _ram(self):
         try:
             for Client in self.__clientList:
-                Client.send_interface("ram")
+                ram = Client.send_interface("ram")
+                QMessageBox(text=f"{ram}").exec()
         except:
             print("Serveur ou client pas connecté")
 

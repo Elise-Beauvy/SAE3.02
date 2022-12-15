@@ -7,9 +7,6 @@ import platform
 
 host = socket.gethostname()
 
-"""with open('hostname.csv', 'w', newline='') as hostname:
-    writer = csv.writer(hostname)
-    writer.writerow([host])"""
 import socket
 
 def serveur():
