@@ -23,7 +23,7 @@ class Serveur1(QMainWindow):
         self.__fichier = QLabel("Lire un fichier:")
         self.__lirefichier = QLineEdit("")
         self.__boutonlire = QPushButton("Lire")
-        self.__etat = QLabel("état du serveur")
+        self.__etat = QLabel("état du serveur/client")
         self.__disconnect = QPushButton("Disconnect")
         self.__kill = QPushButton("Kill")
         self.__reset = QPushButton("Reset")
